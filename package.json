@@ -1,0 +1,25 @@
+{
+  "name": "owski-apply",
+  "version": "0.0.1",
+  "description": "A collection of function application decorators/combinators/higher-order-functions",
+  "main": "apply.js",
+  "scripts": {
+    "test": "mocha tests/*.mocha.js"
+  },
+  "keywords": [
+    "apply",
+    "application",
+    "curry",
+    "head",
+    "tail",
+    "init",
+    "rest",
+    "compose",
+    "composition",
+    "proxy",
+    "proxying",
+    "splat"
+  ],
+  "author": "Ted Cackowski Jr",
+  "license": "MIT"
+}
