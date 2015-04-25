@@ -1,6 +1,6 @@
 
 require('must');
-require('../apply').mport(function(proxy,proxied,compose2,reverseArguments,antitype,apply,splat,chew,compose,head,rest){
+require('../owski-apply').mport(function(proxy,proxied,compose2,reverseArguments,antitype,apply,splat,chew,compose,head,rest){
 require('owski-primitives').mport(function(add,multiply,I){
 require('owski-curry').mport(function(curry){
 
