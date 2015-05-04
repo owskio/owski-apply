@@ -54,20 +54,17 @@ require('owski-curry').mport(function(curry,applyStrict,arrayFunction,argList,mp
   proxied = curry(function(obj,fnName){
     return proxy(obj[fnName],obj);
   }),
-  antitype = function(fn,propertyName){
+  antitotype = function(lens,fn){
     return arrayFunction(function(args){
     //   console.log('propertyName',propertyName);
     //   console.log('this',this);
     //   console.log('this[propertyName]',this[propertyName]);
-      var passable = propertyName
-        ? this[propertyName]
-        : this;
+      var
+      passable = lens(get)(this);
       args.push(passable);
       var result = apply(fn,this,args);
-      propertyName && (this[propertyName] = result);
-      return propertyName
-        ? this
-        : result;
+      lens(set(result))(this);
+      return this;
     });
   },
   splat = function(fn){
