@@ -54,17 +54,27 @@ require('owski-curry').mport(function(curry,applyStrict,arrayFunction,argList,mp
   proxied = curry(function(obj,fnName){
     return proxy(obj[fnName],obj);
   }),
-  antitotype = function(lens,fn){
+  antitotype = function(fn,property){
     return arrayFunction(function(args){
-    //   console.log('propertyName',propertyName);
-    //   console.log('this',this);
-    //   console.log('this[propertyName]',this[propertyName]);
-      var
-      passable = lens(get)(this);
-      args.push(passable);
-      var result = apply(fn,this,args);
-      lens(set(result))(this);
-      return this;
+      if (typeof property === 'undefined') {
+        args.push(this);
+        return apply(fn,this,args);
+      } else if(typeof property === 'string'){
+        var
+        passable = this[property];
+        args.push(passable);
+        var result = apply(fn,this,args);
+        this[property] = result;
+        return this;
+      } else if(typeof property === 'function'){
+        var
+        passable = property(this);
+        args.push(passable);
+        var
+        result = apply(fn,this,args);
+        property(this,result);
+        return this;
+      }
     });
   },
   splat = function(fn){
@@ -93,7 +103,7 @@ require('owski-curry').mport(function(curry,applyStrict,arrayFunction,argList,mp
     compose: compose,
     proxy: proxy,
     proxied: proxied,
-    antitype:antitype,
+    antitotype:antitotype,
     splat: splat,
     chew:chew,
     rest: rest,

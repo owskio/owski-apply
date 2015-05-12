@@ -1,6 +1,6 @@
 
 require('must');
-require('../src/owski-apply').mport(function(proxy,proxied,compose2,reverseArguments,antitype,apply,splat,chew,compose,head,rest){
+require('../src/owski-apply').mport(function(proxy,proxied,compose2,reverseArguments,antitotype,apply,splat,chew,compose,head,rest){
 require('owski-primitives').mport(function(add,multiply,I){
 require('owski-curry').mport(function(curry){
 
@@ -29,46 +29,46 @@ require('owski-curry').mport(function(curry){
       .must
       .equal('ba');
     });
-    it('antitype: should make an fn monkey patchable',function(){
+    it('antitotype: should make an fn monkey patchable',function(){
       var
       a = curry(function(num,value){
         return value + num;
       }),
       b = create({
         c: 6,
-        d: antitype(a,'c')
+        d: antitotype(a,'c')
       },{});
       b.d(5).c.must.equal(11);
     });
-    it('antitype: should work without arguments',function(){
+    it('antitotype: should work without arguments',function(){
       var
       a = function(c){
         return c + 5;
       },
       b = create({
         c: 6,
-        d: antitype(a,'c')
+        d: antitotype(a,'c')
       },{
         e:8
       }),
       z;
       b.d().c.must.equal(11);
     });
-    it('antitype: should work for both chaining, and curry-composing',function(){
+    it('antitotype: should work for both chaining, and curry-composing',function(){
       var
-      a = curry(function(stored){
-        return stored;
+      a = curry(function(dis){
+        return dis;
       }),
-      b = curry(function(first,stored){
-        return stored + first;
+      b = curry(function(first,dis){
+        return dis + first;
       }),
-      c = curry(function(first,second,stored){
-        return stored + first + second;
+      c = curry(function(first,second,dis){
+        return dis + first + second;
       }),
       obj = create({
-        d: antitype(a,'value'),
-        e: antitype(b,'value'),
-        f: antitype(c,'value'),
+        d: antitotype(a,'value'),
+        e: antitotype(b,'value'),
+        f: antitotype(c,'value'),
       },{
         value: '0',
       });
@@ -78,6 +78,33 @@ require('owski-curry').mport(function(curry){
         .f('2','3')
         .value
         .must.equal('0123');
+    });
+    it('antitotype: should work for both chaining without an accumulator property',function(){
+      var
+      a = curry(function(dis){
+        return dis;
+      }),
+      b = curry(function(first,dis){
+        dis.value += first;
+        return dis;
+      }),
+      c = curry(function(first,second,dis){
+        dis.value += first + second;
+        return dis;
+      }),
+      obj = create({
+        d: antitotype(a),
+        e: antitotype(b),
+        f: antitotype(c),
+      },{
+        value: '0',
+      });
+      obj
+      .d()
+      .e('1')
+      .f('2','3')
+      .value
+      .must.equal('0123');
     });
     it('apply: should not require arguments',function(){
       var
