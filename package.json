@@ -31,7 +31,9 @@
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/theodorecackowski/owski-apply.git"
