@@ -1,6 +1,7 @@
 
 var expose = require('owski-expose');
-require('owski-curry').mport(function(curry,applyStrict,arrayFunction,argList,mportFn){
+var argList = require('owski-arglist');
+require('owski-curry').mport(function(curry,applyStrict,arrayFunction,mportFn){
 
   var
   

@@ -1,6 +1,6 @@
 {
   "name": "owski-apply",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A collection of function application decorators/combinators/higher-order-functions",
   "main": "src/owski-apply.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "author": "Ted Cackowski Jr",
   "license": "MIT",
   "dependencies": {
+    "owski-arglist": "*",
     "owski-curry": "*",
     "owski-expose": "*",
     "owski-primitives": "*"
